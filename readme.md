@@ -4,26 +4,30 @@ Documents how to use `rage` for encrypting/decrypting file using `SOPS`.
 
 - https://github.com/getsops/sops/issues/1103#issuecomment-1866390434
 - https://github.com/FiloSottile/age/
-- https://github.com/str4d/rage?
+- https://github.com/str4d/rage
 
 ## 1. Prepare to encrypt
-# Generate identity (private) and recipient (public) with password - will ask for it interactively
-# https://htmlpreview.github.io/?https://github.com/FiloSottile/age/blob/main/doc/age.1.html#RECIPIENTS-AND-IDENTITIES
+
+Generate identity (private) and recipient (public) with password - will ask for it interactively
+
+See also <https://htmlpreview.github.io/?https://github.com/FiloSottile/age/blob/main/doc/age.1.html#RECIPIENTS-AND-IDENTITIES>
 
 ```bash
 $ rage-keygen | rage -p - > key.enc
 Public key: age1lzffdzg65h3edyrwssnu388ny0vkgmswy8047j8fghas9fw4syas67rr9j
 ```
 ## 2. Encrypt
-# Encrypt the text file with sops
+
+Encrypt the text file with sops
 
 ```bash
 sops -e --age age1lzffdzg65h3edyrwssnu388ny0vkgmswy8047j8fghas9fw4syas67rr9j text-clear.yaml > secret.yaml
 ```
 
 ## 3. Prepare to decrypt
-# uses key.enc which was generated in the first step
-# this will ask for password again, interactively
+
+Uses key.enc which was generated in the first step.
+This will ask for password again, interactively
 
 ```bash
 SOPS_AGE_KEY=$(rage -d key.enc)
