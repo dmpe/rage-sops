@@ -33,7 +33,7 @@ This will ask for password again, interactively
 SOPS_AGE_KEY=$(rage -d key.enc)
 ```
 
-# will also print
+this will also print
 
 ```
 # created: 2024-03-09T16:00:50+01:00
